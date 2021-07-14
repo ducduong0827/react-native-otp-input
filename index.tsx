@@ -21,7 +21,7 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
     }
 
     private fields: TextInput[] | null[] = []
-    private keyboardDidHideListener?: EmitterSubscription;
+    //private keyboardDidHideListener?: EmitterSubscription;
     private timer?: NodeJS.Timeout;
     private hasCheckedClipBoard?: boolean;
     private clipBoardCode?: string;
@@ -45,14 +45,14 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
     componentDidMount() {
         this.copyCodeFromClipBoardOnAndroid()
         this.bringUpKeyBoardIfNeeded()
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide)
+        //this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide)
     }
 
     componentWillUnmount() {
         if (this.timer) {
             clearInterval(this.timer)
         }
-        this.keyboardDidHideListener?.remove()
+        //this.keyboardDidHideListener?.remove()
     }
 
     private copyCodeFromClipBoardOnAndroid = () => {
