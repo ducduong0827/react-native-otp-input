@@ -195,6 +195,11 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
                     style={selectedIndex === index ? [defaultTextFieldStyle, codeInputFieldStyle, codeInputHighlightStyle] : [defaultTextFieldStyle, codeInputFieldStyle]}
                     ref={ref => { this.fields[index] = ref }}
                     onChangeText={text => {
+                        let data = parseInt(text)
+                        if ((isNaN(data))) {
+                            this.fields[index]?.setNativeProps({text: ''})
+                            return
+                        }
                         this.handleChangeText(index, text)
                     }}
                     onKeyPress={({ nativeEvent: { key } }) => { this.handleKeyPressTextInput(index, key) }}
