@@ -19,7 +19,7 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
         placeholderCharacter: "",
         selectionColor: '#000',
     }
-
+    private keyPress: string
     private fields: TextInput[] | null[] = []
     //private keyboardDidHideListener?: EmitterSubscription;
     private timer?: NodeJS.Timeout;
@@ -149,6 +149,7 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
 
     private handleKeyPressTextInput = (index: number, key: string) => {
         const digits = this.getDigits()
+        this.keyPress = key
         if (key === 'Backspace') {
             if (!digits[index] && index > 0) {
                 this.handleChangeText(index - 1, '')
@@ -196,6 +197,9 @@ export default class OTPInputView extends Component<InputProps, OTPInputViewStat
                     ref={ref => { this.fields[index] = ref }}
                     onChangeText={text => {
                         let data = parseInt(text)
+                        if (this.keyPress === 'Backspace') {
+                            this.handleChangeText(index, '')
+                        }
                         if ((isNaN(data))) {
                             this.fields[index]?.setNativeProps({text: ''})
                             return
